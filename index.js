@@ -70,7 +70,7 @@ class Calculator {
                 break;
             default: return;
         }
-        if (this.opp === '*') result = parseFloat(result.toFixed(dot));
+        if (this.opp !== '/') result = parseFloat(result.toFixed(dot));
         if (this.opp === '/') result = parseFloat(result.toFixed(3));
         this.curroprnd = result;
         this.opp = undefined;
