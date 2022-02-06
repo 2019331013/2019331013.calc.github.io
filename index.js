@@ -71,7 +71,7 @@ class Calculator {
             default: return;
         }
         if (this.opp !== '/') result = parseFloat(result.toFixed(dot));
-        if (this.opp === '/') result = parseFloat(result.toFixed(3));
+        else result = parseFloat(result.toFixed(3));
         this.curroprnd = result;
         this.opp = undefined;
         this.preoprnd = '';
