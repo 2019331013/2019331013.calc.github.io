@@ -10,6 +10,11 @@ class Calculator {
         this.opp = undefined;
     }
 
+    allclear() {
+        this.clear();
+        this.pretext.innerText = this.currtext.innerText = '';
+    }
+
     delete() {
         if (this.opp != null && this.curroprnd === '') {
             this.opp = undefined;
@@ -163,6 +168,8 @@ class Calculator {
     }
 
     updateDisplay() {
+        if (this.pretext.innerText.toString().includes('?')) return;
+
         if (this.pass(this.curroprnd)) {
             this.currtext.innerText = this.curroprnd;
             return;
@@ -173,8 +180,11 @@ class Calculator {
         if (this.opp != null) {
             if (this.easy) {
                 this.easy = undefined;
-                if (this.opp === '+' || this.opp === '-') this.pretext.innerText =
-                    `${this.preoprnd} ar ${this.curroprnd} abar ${this.sign} kora lage ekhane?`;
+                if (this.opp === '+' || this.opp === '-') {
+                    this.pretext.innerText =
+                        `${this.preoprnd} ar ${this.curroprnd} abar ${this.sign} kora lage ekhane?`;
+                    
+                }
                 else this.pretext.innerText =
                     `${this.curroprnd} diye ${this.sign} o kora lage ekhane?`;
                 
@@ -183,10 +193,11 @@ class Calculator {
                 return;
             }
 
-            this.pretext.innerText =
+            if(this.preoprnd !== '') this.pretext.innerText =
                 `${this.getnum(this.preoprnd)} ${this.opp}`;
             
         } else this.pretext.innerText = '';
+
     }
 }
 
@@ -197,12 +208,10 @@ del = document.getElementById("data-delete");
 allclr = document.getElementById("data-all-clear");
 pretext = document.getElementById("data-previous-operand");
 currtext = document.getElementById("data-current-operand");
-
 easyNumbers = [0, 1, 10, 100, 1000, 10000, 100000, 1000000];
 
 const calculator = new Calculator(pretext, currtext);
 
-let yes = false;
 
 for (item of numbut) {
     item.addEventListener('click', (e) => {
@@ -218,6 +227,7 @@ for (item of oppbut) {
         text = e.target.innerText;
         calculator.chooseopp(text);
         calculator.updateDisplay();
+
     })
 }
 
@@ -225,11 +235,10 @@ equal.addEventListener("click", (e) => {
     text = e.target.innerText;
     calculator.compute();
     calculator.updateDisplay();
-    yes = false;
 })
 
 allclr.addEventListener('click', btn => {
-    calculator.clear();
+    calculator.allclear();
     calculator.updateDisplay();
 })
 
