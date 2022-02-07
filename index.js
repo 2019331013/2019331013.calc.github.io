@@ -103,7 +103,7 @@ class Calculator {
     }
 
     updateDisplay() {
-        if (this.curroprnd === '-') {
+        if (this.curroprnd === '-' || this.curroprnd === '-.') {
             this.currtext.innerText = this.curroprnd;
             return;
         }
