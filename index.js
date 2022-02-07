@@ -31,6 +31,7 @@ class Calculator {
     }
 
     refresh() {
+        if (this.pretext.innerText.toString().includes('?')) this.allclear();
         if (this.curroprnd !== null && this.opp === undefined && this.should === undefined) {
             this.should = this.curroprnd;
             if (this.pass(this.curroprnd)) return;
@@ -225,6 +226,7 @@ for (item of numbut) {
 for (item of oppbut) {
     item.addEventListener('click', (e) => {
         text = e.target.innerText;
+        calculator.refresh();
         calculator.chooseopp(text);
         calculator.updateDisplay();
 
