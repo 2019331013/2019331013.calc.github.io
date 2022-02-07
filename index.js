@@ -21,10 +21,15 @@ class Calculator {
         }
     }
 
+    pass(string) {
+        if (string === '-' || string === '-.') return true;
+        else return false;
+    }
+
     refresh() {
-        if (this.curroprnd === '-') return;
         if (this.curroprnd !== null && this.opp === undefined && this.should === undefined) {
             this.should = this.curroprnd;
+            if (this.pass(this.curroprnd)) return;
             this.curroprnd = '';
         }
     }
@@ -41,7 +46,7 @@ class Calculator {
             }
             return;
         }
-        if (this.curroprnd === '-' || this.curroprnd === '.') return;
+        if (this.pass(this.curroprnd) || this.curroprnd === '.' ) return;
         if (this.preoprnd !== '') {
             this.compute();
             this.updateDisplay();
@@ -91,7 +96,8 @@ class Calculator {
         const deci = stringNumber.split('.')[1];
         let display;
         if (isNaN(int)) {
-            display = '';
+            if (stringNumber.includes('-')) display = '-';
+            else display = '';
         } else {
             display = int.toLocaleString('en', { maximumFractionDigits: 0 });
         }
@@ -103,7 +109,7 @@ class Calculator {
     }
 
     updateDisplay() {
-        if (this.curroprnd === '-' || this.curroprnd === '-.') {
+        if (this.pass(this.curroprnd)) {
             this.currtext.innerText = this.curroprnd;
             return;
         }
