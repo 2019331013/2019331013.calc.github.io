@@ -22,6 +22,7 @@ class Calculator {
     }
 
     refresh() {
+        if (this.curroprnd === '-') return;
         if (this.curroprnd !== null && this.opp === undefined && this.should === undefined) {
             this.should = this.curroprnd;
             this.curroprnd = '';
@@ -34,7 +35,13 @@ class Calculator {
     }
 
     chooseopp(opp) {
-        if (this.curroprnd === '') return;
+        if (this.curroprnd === '') {
+            if (opp === '-') {
+                this.appendNum(opp);
+            }
+            return;
+        }
+        if (this.curroprnd === '-' || this.curroprnd === '.') return;
         if (this.preoprnd !== '') {
             this.compute();
             this.updateDisplay();
@@ -96,6 +103,10 @@ class Calculator {
     }
 
     updateDisplay() {
+        if (this.curroprnd === '-') {
+            this.currtext.innerText = this.curroprnd;
+            return;
+        }
         this.currtext.innerText =
             this.getnum(this.curroprnd);
         if (this.opp != null) {
