@@ -68,11 +68,14 @@ class Calculator {
 
         switch (opp) {
             case '+':
+                if (easyNumbers.indexOf(prev) !== -1 || easyNumbers.indexOf(curr) !== -1)
+                    return true;
                 if (prev < 11 || curr < 11) return true;
                 return false;
             case '-':
                 if (prev > 999 || curr > 999) return false;
-                if (Math.abs(prev-curr) < 6) return true;
+                if (Math.abs(prev - curr) < 6) return true;
+                if (curr >= 0 && curr <= 5) return true;
                 return false;
             case '*':
                 if (easyNumbers.indexOf(prev) !== -1) {
@@ -250,4 +253,39 @@ del.addEventListener('click', btn => {
     calculator.updateDisplay();
 })
 
+let patternForNumbers = [1,2,3,4,5,6,7,8,9,0];
+    let patternForOperators = ['+','-','*','/'];
+
+document.addEventListener('keydown', (e) => {
+    
+    text = e.key;
+    if (patternForNumbers.indexOf(parseFloat(text)) !== -1) {
+        calculator.refresh(text);
+        calculator.appendNum(text);
+        calculator.updateDisplay();
+    }
+    if (e.key === '.') {
+        calculator.refresh(text);
+        calculator.appendNum(text);
+        calculator.updateDisplay();
+    }
+    if (patternForOperators.indexOf(text) !== -1) {
+        calculator.refresh();
+        calculator.chooseopp(text);
+        calculator.updateDisplay();
+    }
+    if (e.key === 'Enter' || e.key === '=') {
+        calculator.compute();
+        calculator.updateDisplay();
+    }
+    if (e.key === "Backspace") {
+        calculator.refresh();
+        calculator.delete();
+        calculator.updateDisplay();
+    }
+    if (e.key == 'Delete') {
+        calculator.allclear();
+        calculator.updateDisplay();
+    }
+})
 

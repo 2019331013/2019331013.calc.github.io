@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     background-color: rgb(127, 255, 212);
+    /* height: 100%; */
     }
 
     
@@ -15,33 +16,59 @@
 
 .calculator-grid{
     display: grid;
-    margin-top: 40px;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-top: 40px;
+    position: relative;
+    /* margin-top: 40px; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* margin: auto; */
+    /* margin-top: 40px; */
     /* border: 1px solid black; */
     
     /* min-height: 100vh; */
 }
 
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.main-heading {
+  text-align: center;
+  /* padding-left: 20px; */
+  /* border-left: 5px solid rgb(170, 11, 11); */
+  font-family: serif;
+  color: rgb(170, 11, 11);
+  font-size: 2.5rem;
+  /* -webkit-text-stroke: 1px; */
+  /* -webkit-text-stroke-color: black; */
+  /* border: 1px solid black; */
+  margin-bottom: 13px;
+  margin-top: 10px;
+}
+
+
+
 .output{
     grid-column: 1/-1;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.5);
     width: 465px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
     padding: 10px;
-    word-wrap: break-word;
-    word-break: break-all;
-    height: 95px;
+    /* word-wrap: break-word; */
+    /* word-break: break-all; */
+    height: 105px;
     border-radius: 20px;
 }
 
 .output .previous-operand{
-    color: rgba(255,255, 255, 0.75);
+    color: rgb(255, 255, 255);
     font-size: 1.5rem;
   }
 
@@ -52,14 +79,14 @@
 
 .buttons {
     display: grid;
-    margin-top: 40px;
+    margin-top: 31px;
     height: 400px;
     width: 465px;
     gap: 22px;
     justify-content:  center;
     max-height: 100vh;
     grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(65px, auto) repeat(5, 65px);
+    grid-template-rows: minmax(55px, auto) repeat(5, 55px);
 }
 
 button {
@@ -72,7 +99,8 @@ button {
 }
 
 button:hover {
-    background-color: #f3d5d5;
+    background-color: rgba(72, 213, 223, .65);
+    border: 2px solid rgb(0, 0, 0);
     transform: scale(1.05);
     transition: .2s;
   }
