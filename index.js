@@ -263,32 +263,37 @@ let patternForNumbers = [1,2,3,4,5,6,7,8,9,0];
 document.addEventListener('keydown', (e) => {
     
     text = e.key;
-    e.preventDefault();
     if (patternForNumbers.indexOf(parseFloat(text)) !== -1) {
+        e.preventDefault();
         calculator.refresh(text);
         calculator.appendNum(text);
         calculator.updateDisplay();
     }
     if (e.key === '.') {
+        e.preventDefault();
         calculator.refresh(text);
         calculator.appendNum(text);
         calculator.updateDisplay();
     }
     if (patternForOperators.indexOf(text) !== -1) {
+        e.preventDefault();
         calculator.refresh(text);
         calculator.chooseopp(text);
         calculator.updateDisplay();
     }
     if (e.key === 'Enter' || e.key === '=') {
+        e.preventDefault();
         calculator.compute();
         calculator.updateDisplay();
     }
     if (e.key === "Backspace") {
+        e.preventDefault();
         calculator.refresh(text);
         calculator.delete();
         calculator.updateDisplay();
     }
     if (e.key == 'Delete') {
+        e.preventDefault();
         calculator.allclear();
         calculator.updateDisplay();
     }
