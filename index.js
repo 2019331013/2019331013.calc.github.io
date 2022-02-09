@@ -30,17 +30,21 @@ class Calculator {
         return false;
     }
 
-    refresh() {
+    refresh(sign) {
         if (this.pretext.innerText.toString().includes('?')) this.allclear();
         if (this.curroprnd !== null && this.opp === undefined && this.should === undefined) {
             this.should = this.curroprnd;
-            if (this.pass(this.curroprnd)) return;
+            if (this.pass(this.curroprnd) || sign === '.') return;
+            if (patternForOperators.indexOf(sign) !== -1) {
+                this.appendNum(sign);
+                return;
+            }
             this.curroprnd = '';
         }
     }
 
     appendNum(number) {
-        if (number === '.' && this.curroprnd.includes('.')) return;
+        if (number === '.' && this.curroprnd.toString().includes('.')) return;
         this.curroprnd = this.curroprnd.toString() + number.toString();
     }
 
@@ -229,7 +233,7 @@ for (item of numbut) {
 for (item of oppbut) {
     item.addEventListener('click', (e) => {
         text = e.target.innerText;
-        calculator.refresh();
+        // calculator.refresh();
         calculator.chooseopp(text);
         calculator.updateDisplay();
 
@@ -259,6 +263,7 @@ let patternForNumbers = [1,2,3,4,5,6,7,8,9,0];
 document.addEventListener('keydown', (e) => {
     
     text = e.key;
+    e.preventDefault();
     if (patternForNumbers.indexOf(parseFloat(text)) !== -1) {
         calculator.refresh(text);
         calculator.appendNum(text);
@@ -270,7 +275,7 @@ document.addEventListener('keydown', (e) => {
         calculator.updateDisplay();
     }
     if (patternForOperators.indexOf(text) !== -1) {
-        calculator.refresh();
+        calculator.refresh(text);
         calculator.chooseopp(text);
         calculator.updateDisplay();
     }
@@ -279,7 +284,7 @@ document.addEventListener('keydown', (e) => {
         calculator.updateDisplay();
     }
     if (e.key === "Backspace") {
-        calculator.refresh();
+        calculator.refresh(text);
         calculator.delete();
         calculator.updateDisplay();
     }
