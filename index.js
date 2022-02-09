@@ -45,6 +45,7 @@ class Calculator {
 
     appendNum(number) {
         if (number === '.' && this.curroprnd.toString().includes('.')) return;
+        if (this.curroprnd.toString().length === 14) return;
         this.curroprnd = this.curroprnd.toString() + number.toString();
     }
 
