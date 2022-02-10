@@ -234,7 +234,7 @@ for (item of numbut) {
 for (item of oppbut) {
     item.addEventListener('click', (e) => {
         text = e.target.innerText;
-        // calculator.refresh();
+        calculator.refresh(text);
         calculator.chooseopp(text);
         calculator.updateDisplay();
 
